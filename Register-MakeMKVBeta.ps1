@@ -1,9 +1,9 @@
 Function Get-MakeMKVBetaKey {
 [CmdletBinding()]
 param(
-    [Parameter(HelpMessage="Specify the URL containing the MakeMKV registration code")]
+	[Parameter(HelpMessage="Specify the URL containing the MakeMKV registration code")]
 	[ValidateNotNull()]
-    [String]$MakeMKVURL = "https://forum.makemkv.com/forum/viewtopic.php?f=5&t=1053"
+	[String]$MakeMKVURL = "https://forum.makemkv.com/forum/viewtopic.php?f=5&t=1053"
 )
 $FunctionName = $MyInvocation.InvocationName
 	Try {
@@ -26,13 +26,13 @@ Return $RegCode
 Function Update-MakeMKVBetaKey {
 [CmdletBinding(SupportsShouldProcess)]
 param(
-    [Parameter(HelpMessage="Specify the registry path for MakeMKV")]
+	[Parameter(HelpMessage="Specify the registry path for MakeMKV")]
 	[ValidateNotNull()]
-    [String]$RegistryPath = 'HKCU:\SOFTWARE\MakeMKV',
+	[String]$RegistryPath = 'HKCU:\SOFTWARE\MakeMKV',
 
-    [Parameter(HelpMessage="Specify the registry key name for the MakeMKV registration key")]
+	[Parameter(HelpMessage="Specify the registry key name for the MakeMKV registration key")]
 	[ValidateNotNull()]
-    [String]$KeyName = 'app_Key',
+	[String]$KeyName = 'app_Key',
 
 	[Parameter(HelpMessage="Specify the MakeMKV registration key")]
 	[ValidateNotNull()]
