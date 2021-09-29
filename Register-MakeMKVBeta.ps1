@@ -40,19 +40,18 @@ param(
 )
 $FunctionName = $MyInvocation.InvocationName
 	Try {
-		$RegistryKeyValue = Get-ItemProperty -Path $RegistryPath -Name $KeyName
-		$OldMakeMKVKey = $RegistryKeyValue.$KeyName
+		$RegistryKeyValue = Get-ItemProperty -Path $RegistryPath -Name $KeyName | Select-Object -ExpandProperty $KeyName
 	}
 	Catch {
 		$PSCmdlet.ThrowTerminatingError($PSItem)
 	}
-	If ($RegCode -notmatch $OldMakeMKVKey) {
-		Write-Verbose "Existing key found: $OldMakeMKVKey; replacing with $RegCode"
+	If ($RegCode -notmatch $RegistryKeyValue) {
+		Write-Verbose "${FunctionName}: Existing key found: $RegistryKeyValue; replacing with $RegCode"
 		Set-ItemProperty -Path $RegistryPath -Name $KeyName -Value $RegCode
-		New-ItemProperty -Path $RegistryPath -Name "$KeyName + _backup" -Value $OldMakeMKVKey
+		New-ItemProperty -Path $RegistryPath -Name "$KeyName + _backup" -Value $RegistryKeyValue
 	}
-	ElseIf ($RegCode -match $OldMakeMKVKey) {
-		Write-Verbose "${FunctionName}: Existing key found: $OldMakeMKVKey; matches current beta key"
+	ElseIf ($RegCode -match $RegistryKeyValue) {
+		Write-Verbose "${FunctionName}: Existing key found: $RegistryKeyValue; matches current beta key"
 	}
 }
 
