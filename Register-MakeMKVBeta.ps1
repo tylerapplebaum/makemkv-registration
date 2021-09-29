@@ -24,16 +24,16 @@ Return $RegCode
 }
 
 Function Update-MakeMKVBetaKey {
-[CmdletBinding()]
+[CmdletBinding(SupportsShouldProcess)]
 param(
     [Parameter(HelpMessage="Specify the registry path for MakeMKV")]
 	[ValidateNotNull()]
     [String]$RegistryPath = 'HKCU:\SOFTWARE\MakeMKV',
-	
+
     [Parameter(HelpMessage="Specify the registry key name for the MakeMKV registration key")]
 	[ValidateNotNull()]
     [String]$KeyName = 'app_Key',
-	
+
 	[Parameter(HelpMessage="Specify the MakeMKV registration key")]
 	[ValidateNotNull()]
 	[String]$RegCode
@@ -55,4 +55,4 @@ $FunctionName = $MyInvocation.InvocationName
 	}
 }
 
-Update-MakeMKVBetaKey -RegCode (Get-MakeMKVBetaKey -Verbose) -Verbose 
+Update-MakeMKVBetaKey -RegCode (Get-MakeMKVBetaKey -Verbose) -Verbose
