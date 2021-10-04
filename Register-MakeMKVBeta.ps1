@@ -48,7 +48,7 @@ $FunctionName = $MyInvocation.InvocationName
 	If ($RegCode -notmatch $RegistryKeyValue) {
 		Write-Verbose "${FunctionName}: Existing key found: $RegistryKeyValue; replacing with $RegCode"
 		Set-ItemProperty -Path $RegistryPath -Name $KeyName -Value $RegCode
-		New-ItemProperty -Path $RegistryPath -Name "$KeyName + _backup" -Value $RegistryKeyValue
+		New-ItemProperty -Path $RegistryPath -Name $($KeyName + "_backup") -Value $RegistryKeyValue | Out-Null
 	}
 	ElseIf ($RegCode -match $RegistryKeyValue) {
 		Write-Verbose "${FunctionName}: Existing key found: $RegistryKeyValue; matches current beta key"
